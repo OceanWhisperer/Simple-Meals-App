@@ -23,8 +23,8 @@ class _TabsState extends State<TabsScreen> {
     Widget activepage = const CategoriesScreen();
     var activepagetitle = 'categories';
     if (selectedpageindex == 1) {
-      activepagetitle = 'favourites';
-      activepage = const MealsScreen(title: 'favourites', meals: []);
+      activepage = const MealsScreen(meals: []);
+      activepagetitle = 'Your Favorites';
     }
     return Scaffold(
       appBar: AppBar(
