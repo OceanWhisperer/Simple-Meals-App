@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mealsapp/models/meal.dart';
 import 'package:mealsapp/screens/categories.dart';
+import 'package:mealsapp/screens/filters.dart';
 import 'package:mealsapp/screens/meals.dart';
+import 'package:mealsapp/widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -47,6 +49,18 @@ class _TabsState extends State<TabsScreen> {
     });
   }
 
+  void _setscreen(String identifier) async {
+    Navigator.of(context).pop();
+    if (identifier == 'filters') {
+      // what we are getting ? map of filter and bool.
+      final result = await Navigator.of(context).push<Map<Filter, bool>>(
+        MaterialPageRoute(
+          builder: (ctx) => const FiletersScreen(),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget activepage = CategoriesScreen(
@@ -60,9 +74,13 @@ class _TabsState extends State<TabsScreen> {
       );
       activepagetitle = 'Your Favorites';
     }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(activepagetitle),
+      ),
+      drawer: MainDrawer(
+        onselectscreen: _setscreen,
       ),
       body: activepage,
       bottomNavigationBar: BottomNavigationBar(
